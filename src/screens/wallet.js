@@ -132,8 +132,8 @@ const handleUri=(e)=>{
       {currentAccount ?<InputGroup className="mb-3">
       <InputGroup.Text >Enter Selling Price</InputGroup.Text>
       <Form.Control id="val" aria-label="value" placeholder="in UZHETH" onChange={(e)=>handleValue(e.target.value)} />
-      <InputGroup.Text>Enter uri</InputGroup.Text>
-      <Form.Control id="uri" aria-label="uri" placeholder="NFT uri" onChange={(e)=>handleUri(e.target.value)} />
+      <InputGroup.Text>Enter Address</InputGroup.Text>
+      <Form.Control id="uri" aria-label="uri" placeholder="NFT address" onChange={(e)=>handleUri(e.target.value)} />
     </InputGroup>:<></>}
       <div>{currentAccount ? mintNftButton(currentValue*1000000000000000,currentUri) : connectWalletButton()}</div>
     </div>
