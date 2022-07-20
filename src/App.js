@@ -10,6 +10,8 @@ import Header from "./components/Header";
 import Home from "./components/Login";
 import Dashboard from "./components/Dashboard";
 import ThemeProvider from 'react-bootstrap/ThemeProvider'
+import Mint from "./screens/wallet";
+import BuyNFT from "./screens/sell";
 function App() {
   return (
     <ThemeProvider
@@ -20,7 +22,8 @@ function App() {
         <Header></Header>
         <div className="container">
         <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/mint" element={<Mint />} />
+            <Route path="/buy" element={<BuyNFT />} />
             <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
         </div>

@@ -4,15 +4,20 @@ import {
   Routes, //replaces "Switch" used till v5
   Route,
 } from "react-router-dom";
-import "./App.css";
+import "../App.css";
 import { ethers } from "ethers";
-import contract from "./contracts/NFT11.json";
-
-const contractAddress = "0x95d6c3Da0f7dEbcbFA973017dF41D5DEF428A066";
+import contract from "../contracts/NFTdemo.json";
+import InputGroup from 'react-bootstrap/InputGroup';
+import Form from 'react-bootstrap/Form';
+//const contractAddress = "0x95d6c3Da0f7dEbcbFA973017dF41D5DEF428A066";
+const contractAddress = "0x17d511852c7491260545743004FB8Db1a4C8c15e";//uzheth
+//const contractAddress = "0xC2F00C4dd6b76C0Ab99a27dF45012e2DaaabBDCF"; //bscnet
 const abi = contract.abi;
 
-function App() {
+function Mint() {
     const [currentAccount, setCurrentAccount] = useState(null);
+    const [currentValue, setCurrentValue] = useState(0);
+    const [currentUri, setCurrentUri] = useState(null);
 
   const checkWalletIsConnected = async () => {
     const { ethereum } = window;
@@ -66,7 +71,7 @@ function App() {
       console.log(ethers.utils.formatEther(balance), "fff");
       // Format the string into main latest balance
     });
-  const mintNftHandler = async () => {
+  const mintNftHandler = async (value,uri) => {
     try {
       const { ethereum } = window;
 
@@ -74,9 +79,10 @@ function App() {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
         const nftContract = new ethers.Contract(contractAddress, abi, signer);
-
+        console.log(value,'value')
+console.log(signer,ethers.utils.parseEther((value*0.001).toString()))
         console.log("Initialize payment");
-        let nftTxn = await nftContract.approve(contractAddress, 1); //(1, { value: ethers.utils.parseEther("0.01") });
+        let nftTxn = await nftContract.safeMint(currentAccount,uri,value,{value:ethers.utils.parseEther((0.002).toString())});
 
         console.log("Mining... please wait");
         await nftTxn.wait();
@@ -103,9 +109,9 @@ function App() {
     );
   };
 
-  const mintNftButton = () => {
+  const mintNftButton = (value,uri) => {
     return (
-      <button onClick={mintNftHandler} className="cta-button mint-nft-button">
+      <button onClick={()=>mintNftHandler(value,uri)} className="cta-button mint-nft-button">
         Mint NFT
       </button>
     );
@@ -114,13 +120,24 @@ function App() {
   useEffect(() => {
     checkWalletIsConnected();
   }, []);
-
+const handleValue=(e)=>{
+  setCurrentValue(e)
+}
+const handleUri=(e)=>{
+  setCurrentUri(e)
+}
   return (
     <div className="main-app">
-      <h1>LuckyCoin11 Minting</h1>
-      <div>{currentAccount ? mintNftButton() : connectWalletButton()}</div>
+      <h1>UZH Group11 Minting Platform</h1>
+      {currentAccount ?<InputGroup className="mb-3">
+      <InputGroup.Text >Enter Selling Price</InputGroup.Text>
+      <Form.Control id="val" aria-label="value" placeholder="in UZHETH" onChange={(e)=>handleValue(e.target.value)} />
+      <InputGroup.Text>Enter uri</InputGroup.Text>
+      <Form.Control id="uri" aria-label="uri" placeholder="NFT uri" onChange={(e)=>handleUri(e.target.value)} />
+    </InputGroup>:<></>}
+      <div>{currentAccount ? mintNftButton(currentValue,currentUri) : connectWalletButton()}</div>
     </div>
   );}
 
-  export default App;
+  export default Mint;
   

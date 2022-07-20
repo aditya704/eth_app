@@ -4,12 +4,12 @@ function Login() {
   let navigate = useNavigate();
   return (
     <div>
-      <Button
+      {/* <Button
         onSubmit={() => {
           navigate('/home');
         }}
       >Dashboard</Button>
-      <Button variant="primary">Primary</Button>{' '}
+      <Button variant="primary">Primary</Button>{' '} */}
     </div>
   );
 }
