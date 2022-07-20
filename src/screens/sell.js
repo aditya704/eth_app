@@ -199,7 +199,7 @@ const handleBid=(e)=>{
     setCurrentBid(e)
   }
   const handleNewSell=(e)=>{
-    setNewSell(e)
+    setNewSell(e*1000000000000000)
   }
   const handlePop=(val)=>{
     setCurrentId(val);
@@ -240,7 +240,7 @@ const handleBid=(e)=>{
           <Card onClick={()=>{handlePop(dataid[idx])}}>
             <Card.Img variant="top" src={datauri[idx]} />
             <Card.Body>
-              <Card.Title>Price : {(dataprice[idx]).toFixed(2)} UZHETH</Card.Title>
+              <Card.Title>Price : {(dataprice[idx]*0.000000000000001).toFixed(2)} UZHETH</Card.Title>
               <Card.Text>
                 Owner : {dataown[idx]}
               </Card.Text>

@@ -135,7 +135,7 @@ const handleUri=(e)=>{
       <InputGroup.Text>Enter uri</InputGroup.Text>
       <Form.Control id="uri" aria-label="uri" placeholder="NFT uri" onChange={(e)=>handleUri(e.target.value)} />
     </InputGroup>:<></>}
-      <div>{currentAccount ? mintNftButton(currentValue,currentUri) : connectWalletButton()}</div>
+      <div>{currentAccount ? mintNftButton(currentValue*1000000000000000,currentUri) : connectWalletButton()}</div>
     </div>
   );}
 
