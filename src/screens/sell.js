@@ -199,7 +199,7 @@ const handleBid=(e)=>{
     setCurrentBid(e)
   }
   const handleNewSell=(e)=>{
-    setNewSell(e*1000000000000000)
+    setNewSell(e)
   }
   const handlePop=(val)=>{
     setCurrentId(val);
